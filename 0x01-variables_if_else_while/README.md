@@ -1,1 +1,1 @@
-0. Positive anything is better than negative nothing 
+This is a README of this project
