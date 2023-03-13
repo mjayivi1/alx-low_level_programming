@@ -1,157 +1,47 @@
 #include "main.h"
 #include <stdlib.h>
 
-int word_count(char *str);
-char *first_word(char *str);
-
 /**
- * **strtow - set memory function
+ * alloc_grid - Returns a pointer to a 2-dimensional array of
+ *               integers with each element initalized to 0.
+ * @width: The width of the 2-dimensional array.
+ * @height: The height of the 2-dimensional array.
  *
- * @str: pointer to array
- *
- * Return: s
+ * Return: If width <= 0, height <= 0, or the function fails - NULL.
+ *         Otherwise - a pointer to the 2-dimensional array of integers.
  */
-
-char **strtow(char *str)
+int **alloc_grid(int width, int height)
 {
-	char **strArr;
-	int wordCount, counter, letter;
+	int **twoD;
+	int hgt_index, wid_index;
 
-
-	if (str == NULL || *str == '\0')
+	if (width <= 0 || height <= 0)
 		return (NULL);
 
-	wordCount = word_count(str);
+	twoD = malloc(sizeof(int *) * height);
 
-	strArr = (char **)malloc(sizeof(char *) * (wordCount + 1));
-
-	if (!strArr)
+	if (twoD == NULL)
 		return (NULL);
 
-	for (counter = 0; counter <= wordCount;)
+	for (hgt_index = 0; hgt_index < height; hgt_index++)
 	{
-		strArr[counter] = (NULL);
-		counter++;
-	}
+		twoD[hgt_index] = malloc(sizeof(int) * width);
 
-	counter = 0;
-	wordCount = 0;
-	letter = 0;
-
-
-	while (str[counter] != '\0')
-	{
-			if (str[counter] != ' ' && !letter)
-			{
-				strArr[wordCount] = first_word(str + wordCount);
-				if (!strArr[counter])
-				{
-					wordCount--;
-					while (wordCount >= 0)
-						free(*(strArr + wordCount--));
-					free(strArr);
-					return (NULL);
-				}
-				wordCount++;
-				letter = 1;
-			}
-			else if (*(str + counter) == ' ' && letter)
-				letter = 0;
-			counter++;
-
-		if (!wordCount)
-			return (NULL);
-
-		return (strArr);
-
-		xif (str[wordCount] != ' ' && !letter)
+		if (twoD[hgt_index] == NULL)
 		{
-		       strArr[counter] = first_word(str + counter);
-			if (!strArr[counter])
-			{
-				wordCount--;
-				while (wordCount >= 0)
-					free(*(strArr + wordCount--));
-				free(strArr);
-				return (NULL);
-			}
-			wordCount++;
-			letter = 1;
-		}
-		else if (str[counter] == ' ' && letter)
-			letter = 0;
-		counter++;
-	}
-	if (!wordCount)
-		return (NULL);
+			for (; hgt_index >= 0; hgt_index--)
+				free(twoD[hgt_index]);
 
-	return (strArr);
-}
-
-/**
- * word_count - Count number of words
- *
- * @str: char pointer
- *
- * Return: Word count
- */
-
-int word_count(char *str)
-{
-	int counter = 0, wordCount, letter;
-
-	while (str[counter] != '\0')
-	{
-		if (str[counter] != ' ' && !letter)
-		{
-			wordCount++;
-			letter = 1;
-		}
-		else if (str[counter] == ' ' && letter)
-		{
-			letter = 0;
-		}
-		counter++;
-	}
-	return (wordCount);
-}
-
-
-/**
- * first_word - Gets first word
- * @str: char pointer
- * Return: Pointer to word
- */
-
-char *first_word(char *str)
-{
-	int counter;
-	char *word;
-
-	counter = 0;
-
-	while (str[counter] != ' ' && str[counter] != '\0')
-	{
-		counter++;
-	}
-
-	word = malloc(sizeof(char) * (counter + 1));
-
-		if (!word)
-		{
+			free(twoD);
 			return (NULL);
 		}
+	}
 
-		word[counter] = '\0';
+	for (hgt_index = 0; hgt_index < height; hgt_index++)
+	{
+		for (wid_index = 0; wid_index < width; wid_index++)
+			twoD[hgt_index][wid_index] = 0;
+	}
 
-		counter--;
-
-		while (counter >= 0)
-		{
-			word[counter] = str[counter];
-			counter--;
-		}
-		return (word);
+	return (twoD);
 }
-
-
