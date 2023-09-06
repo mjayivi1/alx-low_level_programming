@@ -1,4 +1,0 @@
-C - Static libraries
-
-Tasks
-
