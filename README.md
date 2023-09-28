@@ -1,3 +1,1 @@
-C- memory allocation
-
-
+0x14. C - Bit manipulation
