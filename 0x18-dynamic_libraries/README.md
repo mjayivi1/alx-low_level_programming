@@ -7,7 +7,7 @@ This project is part of the ALX Low-Level Programming curriculum and focuses on 
 - **Author:** mjayivi1
 
 ## GitHub Repository
-- **Repository:** [alx-low_level_programming](https://github.com/mjayivi1/alx-low_level_programming/0x18-dynamic_libraries)
+- **Repository:** [alx-low_level_programming](https://github.com/mjayivi1/alx-low_level_programming)
 
 ## Tasks
 ### Task 0: Creating the Dynamic Library libdynamic.so
